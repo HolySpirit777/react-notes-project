@@ -37,7 +37,6 @@ class Board extends React.Component {
             showGroups: false,
             showNotes: false,
             activateInput: false,
-            toggle: true,
             textNote: '',
             valueEdit: {
                 key: '',
@@ -135,8 +134,7 @@ class Board extends React.Component {
     
             notes[index].text = this.state.valueEdit.text;
             this.setState({
-                notes: notes,
-                toggle: !this.state.toggle
+                notes: notes
             });
         }
 
@@ -159,12 +157,6 @@ class Board extends React.Component {
     clearGroups = () => {
         this.setState({
             groups: []
-        });
-    }
-
-    toggleEdit = () => {
-        this.setState({
-            toggle: !this.state.toggle
         });
     }
 
@@ -280,7 +272,6 @@ class Board extends React.Component {
                 edit={this.ediNote}
                 set={(e) => this.setValueEdit(e, note.key)}
                 toggleAction={this.toggleEdit}
-                toggleNote={this.state.toggle}
                 selectGroups={this.state.selectGroups}
                 showSelectedGroups={this.showGroupsNotes}
                 groups={this.state.groups}
