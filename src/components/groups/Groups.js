@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './Groups.css';
 
 const Groups = (props) => {
 
@@ -24,7 +25,6 @@ const Groups = (props) => {
         if(groupName !== '') {
             props.addGroup(groupName);
             setGroupName(groupName = '');
-            alert('group has been added');
         } else {
             alert('field is empty!');
         }
@@ -60,7 +60,7 @@ const Groups = (props) => {
     }
 
     return (
-        <div>
+        <div className="groups">
             <h1>Groups</h1>
             <button onClick={showCreatePanel}>create group</button>
             <button onClick={showGroupsPanel}>show groups</button>

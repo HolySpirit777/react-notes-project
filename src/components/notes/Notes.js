@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Notes.css';
 
 export const GetGroups = (props) => {
     return (
@@ -41,23 +42,23 @@ const Notes = (props) => {
     }
 
     return (
-        <div className="note">
+        <div className="note-note">
             { toggle ? <div>
             <br/>
-            <label>{props.text}</label>
+            <label className="note-text">{props.text}</label>
             <br/>
             <label>Group: {props.memberOfGroup}</label>
             <br/>
-            <button onClick={props.delete}>delete note</button>
-            <button onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
-            <button onClick={returnBox}>edit</button>
+            <button className="note-button" onClick={props.delete}>delete note</button>
+            <button className="note-button" onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
+            <button className="note-button" onClick={returnBox}>edit</button>
             {groups}
             </div> : <div>
             <br/>
             <textarea onChange={props.set}></textarea>
             <br/>
-            <button onClick={updateReturn}>update</button>
-            <button onClick={returnBox}>return</button>
+            <button className="note-button" onClick={updateReturn}>update</button>
+            <button className="note-button" onClick={returnBox}>return</button>
             </div>
 }
         </div>

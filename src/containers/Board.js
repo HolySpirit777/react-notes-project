@@ -2,13 +2,14 @@ import React from 'react';
 import Actions from '../components/actions/Actions';
 import Notes from '../components/notes/Notes';
 import Groups from '../components/groups/Groups';
+import './Board.css';
 
 const Input = (props) => {
 
     let max = 40;
 
     return (
-        <div>
+        <div className="board-input">
             <label>Add Notes</label>
             <br/>
             <textarea maxLength={max} name="nota" value={props.value} placeholder="Enter the text" onChange={props.input}></textarea>
@@ -284,7 +285,7 @@ class Board extends React.Component {
         }
 
         let details = (
-            <div>
+            <div className="board-details">
                 <label>Total of notes: </label>{this.state.notes ? this.state.notes.length : 0}
                 <br />
                 <label>Total of groups: </label>{this.state.groups ? this.state.groups.length : 0}
