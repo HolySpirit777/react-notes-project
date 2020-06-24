@@ -52,6 +52,7 @@ const Notes = (props) => {
             <button className="note-button" onClick={props.delete}>delete note</button>
             <button className="note-button" onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
             <button className="note-button" onClick={returnBox}>edit</button>
+            <button className="note-button" onClick={() => props.increaseImportance(props.idNote)}>Importance {props.noteImportance}</button>
             {groups}
             </div> : <div>
             <br/>

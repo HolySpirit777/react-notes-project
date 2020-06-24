@@ -52,6 +52,7 @@ class Board extends React.Component {
         this.activateNote = this.activateNote.bind(this);
         this.activateGroups = this.activateGroups.bind(this);
         this.addToGroup = this.addToGroup.bind(this);
+        this.increaseNoteImportance = this.increaseNoteImportance.bind(this);
 
     }
 
@@ -71,7 +72,7 @@ class Board extends React.Component {
 
         if(this.state.textNote) {
             let notes = this.state.notes ? [...this.state.notes] : [];
-            notes.push({key: ID(), text: this.state.textNote, group: 'None'});
+            notes.push({key: ID(), text: this.state.textNote, group: 'None', importance: 0});
             this.setState({
                 notes: notes,
                 showNotes: true,
@@ -156,8 +157,13 @@ class Board extends React.Component {
     }
 
     clearGroups = () => {
+        let notes = [...this.state.notes];
+        for (let note = 0; note < notes.length; note++) {
+            notes[note].group = 'None';
+        }
         this.setState({
-            groups: []
+            groups: [],
+            notes: notes
         });
     }
 
@@ -235,6 +241,20 @@ class Board extends React.Component {
             setGroupToUse: e.target.value
         })
     }
+
+    increaseNoteImportance(noteKey) {
+        let notes = this.state.notes.slice();
+        for (const index in notes) {
+            if(notes[index].key === noteKey){
+                if(notes[index].importance < 10) {
+                    notes[index].importance += 1;
+                }
+            }
+        }
+        this.setState({
+            notes: notes
+        });
+    }
     
 
     render() {
@@ -278,6 +298,8 @@ class Board extends React.Component {
                 groups={this.state.groups}
                 addNoteToGroup={this.addNoteToGroup}
                 groupToUse={this.setGroupToUse}
+                noteImportance={note.importance}
+                increaseImportance={this.increaseNoteImportance}
                 />
                 
             });
