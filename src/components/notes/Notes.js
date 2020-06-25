@@ -1,69 +1,55 @@
 import React, { useState } from 'react';
+import Note from './Note/Note';
 import './Notes.css';
 
-export const GetGroups = (props) => {
-    return (
-        <div>
-        <select onChange={props.groupToUse}>
-        {props.getGroups.map(group => <option key={group.key} value={group.name}>{group.name}</option>)}
-        </select>
-        <br />
-        <button onClick={props.addToGroup}>add</button>
-        </div>
+const Input = (props) => {
 
-    )
-}
-
-const Notes = (props) => {
-
-    let [toggle, setToggle] = useState(true);
-    let [toggleGroup, setToggleGroup] = useState(false);
-
-    let groups = null;
-
-    if(toggleGroup) {
-        groups = props.groups.length > 0 ? <GetGroups 
-        getGroups={props.groups} 
-        addToGroup={() => props.addNoteToGroup(props.idNote)}
-        groupToUse={props.groupToUse} 
-        />
-        : <><br/>
-        <label>'No groups created'</label>
-        </>
-    }
-
-    function returnBox() {
-        setToggle(toggle = !toggle);
-    }
-
-    function  updateReturn() {
-        props.edit();
-        setToggle(toggle = !toggle);
-    }
+    let max = 40;
 
     return (
-        <div className="note-note">
-            { toggle ? <div>
+        <div className="board-input">
+            <label>Add Notes</label>
             <br/>
-            <label className="note-text">{props.text}</label>
+            <textarea maxLength={max} name="nota" value={props.value} placeholder="Enter the text" onChange={props.input}></textarea>
             <br/>
-            <label>Group: {props.memberOfGroup}</label>
+            <label>Characters left: {max - props.value.length} </label>
             <br/>
-            <button className="note-button" onClick={props.delete}>delete note</button>
-            <button className="note-button" onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
-            <button className="note-button" onClick={returnBox}>edit</button>
-            <button className="note-button" onClick={() => props.increaseImportance(props.idNote)}>Importance {props.noteImportance}</button>
-            {groups}
-            </div> : <div>
-            <br/>
-            <textarea onChange={props.set}></textarea>
-            <br/>
-            <button className="note-button" onClick={updateReturn}>update</button>
-            <button className="note-button" onClick={returnBox}>return</button>
-            </div>
-}
+            <button onClick={props.add}>Add</button>
+            <button onClick={props.clear}>Clear</button>
         </div>
     );
 }
+
+const Notes = props => {
+
+    let [activateInput, setActivateInput] = useState(false);
+
+    // if(this.state.activateInput) {
+    //     input = <Input 
+    //     input={this.setNote} 
+    //     add={this.addNote} 
+    //     clear={this.clearInput} 
+    //     value={this.state.textNote}
+    //     />
+    // }
+
+    return <div>
+        <h1 className="notes-text">Notes</h1>
+        {props.notes.length > 0 ? props.notes.map(note => {
+                return <div className>
+                <Note
+                idNote={note.key}
+                text={note.text}
+                memberOfGroup={note.group}
+                noteImportance={note.importance}
+                set={(e) => this.setValueEdit(e, note.key)}
+                delete={this.deleteNote.bind(this, note.key)}
+                />
+                </div>
+        }) : <p className="notes-text">No notes</p>}
+    </div>
+
+}
+
 
 export default Notes;

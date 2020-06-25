@@ -4,24 +4,6 @@ import Notes from '../components/notes/Notes';
 import Groups from '../components/groups/Groups';
 import './Board.css';
 
-const Input = (props) => {
-
-    let max = 40;
-
-    return (
-        <div className="board-input">
-            <label>Add Notes</label>
-            <br/>
-            <textarea maxLength={max} name="nota" value={props.value} placeholder="Enter the text" onChange={props.input}></textarea>
-            <br/>
-            <label>Characters left: {max - props.value.length} </label>
-            <br/>
-            <button onClick={props.add}>Add</button>
-            <button onClick={props.clear}>Clear</button>
-        </div>
-    );
-}
-
 let ID = function () {
     return Math.random().toString(16).substr(5);
   };
@@ -37,7 +19,6 @@ class Board extends React.Component {
             selectGroups: false,
             showGroups: false,
             showNotes: false,
-            activateInput: false,
             textNote: '',
             valueEdit: {
                 key: '',
@@ -86,13 +67,13 @@ class Board extends React.Component {
 
     activateNote() {
 
-        this.setState({
-            activateInput: !this.state.activateInput,
-            showGroups: false,
-            showNotes: true
-            
-        });
-
+            this.setState(
+                {
+                    showNotes: !this.state.showNotes,
+                    showGroups: false
+                }
+            )
+    
     }
 
     setNote(event) {
@@ -170,8 +151,7 @@ class Board extends React.Component {
     activateGroups() {
         this.setState({
             showGroups: !this.state.showGroups,
-            showNotes: false,
-            activateInput: false
+            showNotes: false
         })
     }
 
@@ -251,6 +231,7 @@ class Board extends React.Component {
                 }
             }
         }
+
         this.setState({
             notes: notes
         });
@@ -259,9 +240,9 @@ class Board extends React.Component {
 
     render() {
 
-        let input = null
         let notes = null;
         let groups = null;
+        let filterByGroup = null;
 
         if(this.state.showGroups) {
             groups = <Groups  
@@ -273,46 +254,60 @@ class Board extends React.Component {
 
         }
 
-        if(this.state.activateInput) {
-            input = <Input 
-            input={this.setNote} 
-            add={this.addNote} 
-            clear={this.clearInput} 
-            value={this.state.textNote}
-            />
-        }
-
         if(this.state.showNotes) {
-            notes = this.state.notes.map(note => {
-                return <Notes 
-                key={note.key}
-                idNote={note.key} 
-                text={note.text} 
-                memberOfGroup={note.group}
-                delete={this.deleteNote.bind(this, note.key)}
+            notes = <Notes
+                notes={this.state.notes}
                 edit={this.ediNote}
-                set={(e) => this.setValueEdit(e, note.key)}
                 toggleAction={this.toggleEdit}
                 selectGroups={this.state.selectGroups}
                 showSelectedGroups={this.showGroupsNotes}
                 groups={this.state.groups}
                 addNoteToGroup={this.addNoteToGroup}
                 groupToUse={this.setGroupToUse}
-                noteImportance={note.importance}
                 increaseImportance={this.increaseNoteImportance}
                 />
-                
-            });
-
         }
+
+        filterByGroup = (
+            this.state.groups.length > 0 && this.state.showNotes && this.state.notes.length > 0 ? <div className="board-details">
+                <label className="board-details-text">filter by group: </label> 
+                <select className="board-details-select">
+                    <option>none</option>
+                    {this.state.groups.map(group => 
+                    <option 
+                    key={group.key} 
+                    value={group.name}>
+                        {group.name}
+                    </option>)}
+                </select>
+                <button>apply</button>
+                <br/>
+                <label className="board-details-text">filter by importance: </label> 
+                <select className="board-details-select">
+                    <option value="1">none</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <button>apply</button>
+            </div> : null
+        )
 
         let details = (
             <div className="board-details">
-                <label>Total of notes: </label>{this.state.notes ? this.state.notes.length : 0}
+                <label>total of notes: </label>{this.state.notes ? this.state.notes.length : 0}
                 <br />
-                <label>Total of groups: </label>{this.state.groups ? this.state.groups.length : 0}
+                <label>total of groups: </label>{this.state.groups ? this.state.groups.length : 0}
             </div>
         )
+        
 
         return (
             <div className="App">
@@ -322,7 +317,8 @@ class Board extends React.Component {
                 groups={this.activateGroups} />
                 {details}
                 {groups}
-                {input}
+                {filterByGroup}
+                {/* {filterByImportance} */}
                 {notes}
             </div>
         )

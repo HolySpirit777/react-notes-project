@@ -6,3 +6,11 @@
 .board-input {
     text-align: center;
 }
+
+.board-details-text {
+    margin-right: 5px;
+}
+
+.board-details-select {
+    margin-right: 5px;
+}
