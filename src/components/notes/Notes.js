@@ -35,6 +35,11 @@ const Notes = props => {
 
     return <div>
         <h1 className="notes-text">Notes</h1>
+        <div className="notes-panel-button">
+        <button className="notes-button">add note</button>
+        <button className="notes-button">delete all notes</button>
+        </div>
+
         {props.notes.length > 0 ? props.notes.map(note => {
                 return <div className>
                 <Note

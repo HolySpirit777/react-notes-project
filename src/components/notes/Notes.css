@@ -1,3 +1,11 @@
 .notes-text {
     text-align: center;
 }
+
+.notes-button {
+    padding: 3px;
+}
+
+.notes-panel-button {
+    text-align: center;
+}
