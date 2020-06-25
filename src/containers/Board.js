@@ -37,17 +37,7 @@ class Board extends React.Component {
 
     }
 
-    setValueEdit(e, key) {
-
-        this.setState({
-            text: e.target.value,
-            valueEdit: {
-                key: key,
-                text: e.target.value
-            }
-        });
-
-    }
+    //Notes section
 
     addNote() {
 
@@ -62,25 +52,6 @@ class Board extends React.Component {
         } else {
             alert('field empty');
         }
-
-    }
-
-    activateNote() {
-
-            this.setState(
-                {
-                    showNotes: !this.state.showNotes,
-                    showGroups: false
-                }
-            )
-    
-    }
-
-    setNote(event) {
-        
-        this.setState({
-            textNote: event.target.value
-        });
 
     }
 
@@ -121,7 +92,24 @@ class Board extends React.Component {
             });
         }
 
+    }
 
+    activateNote() {
+
+            this.setState(
+                {
+                    showNotes: !this.state.showNotes,
+                    showGroups: false
+                }
+            )
+    
+    }
+
+    setNote(event) {
+        
+        this.setState({
+            textNote: event.target.value
+        });
 
     }
 
@@ -131,11 +119,40 @@ class Board extends React.Component {
         })
     }
 
+    setValueEdit(e, key) {
+
+        this.setState({
+            text: e.target.value,
+            valueEdit: {
+                key: key,
+                text: e.target.value
+            }
+        });
+
+    }
+
+    increaseNoteImportance(noteKey) {
+        let notes = this.state.notes.slice();
+        for (const index in notes) {
+            if(notes[index].key === noteKey){
+                if(notes[index].importance < 10) {
+                    notes[index].importance += 1;
+                }
+            }
+        }
+
+        this.setState({
+            notes: notes
+        });
+    }
+
     clearInput = () => {
         this.setState({
             textNote: ''
         });
     }
+
+    //Groups section
 
     clearGroups = () => {
         let notes = [...this.state.notes];
@@ -222,27 +239,11 @@ class Board extends React.Component {
         })
     }
 
-    increaseNoteImportance(noteKey) {
-        let notes = this.state.notes.slice();
-        for (const index in notes) {
-            if(notes[index].key === noteKey){
-                if(notes[index].importance < 10) {
-                    notes[index].importance += 1;
-                }
-            }
-        }
-
-        this.setState({
-            notes: notes
-        });
-    }
-    
-
     render() {
 
         let notes = null;
         let groups = null;
-        let filterByGroup = null;
+        let filterBy = null;
 
         if(this.state.showGroups) {
             groups = <Groups  
@@ -268,7 +269,7 @@ class Board extends React.Component {
                 />
         }
 
-        filterByGroup = (
+        filterBy = (
             this.state.groups.length > 0 && this.state.showNotes && this.state.notes.length > 0 ? <div className="board-details">
                 <label className="board-details-text">filter by group: </label> 
                 <select className="board-details-select">
@@ -317,8 +318,7 @@ class Board extends React.Component {
                 groups={this.activateGroups} />
                 {details}
                 {groups}
-                {filterByGroup}
-                {/* {filterByImportance} */}
+                {filterBy}
                 {notes}
             </div>
         )
