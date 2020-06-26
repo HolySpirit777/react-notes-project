@@ -46,10 +46,10 @@ const Note = (props) => {
         <div className="note-note">
         { toggle ? <div>
         <br/>
-        <button className="note-button-importance" onClick={() => props.increaseImportance(props.idNote)}>Importance {props.noteImportance}</button><br/>
+        <button className="note-button-importance" onClick={() => props.increaseImportance(props.idNote)}>importance {props.noteImportance}</button><br/>
         <label className="note-text">{props.text}</label>
         <br/>
-        <label>Group: {props.memberOfGroup}</label>
+        <label>group: {props.memberOfGroup}</label>
         <br/>
         <button className="note-button" onClick={() => props.delete(props.idNote)}>delete note</button>
         <button className="note-button" onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
