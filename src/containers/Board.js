@@ -53,6 +53,8 @@ class Board extends React.Component {
             alert('field empty');
         }
 
+        console.log(this.state.notes);
+
     }
 
     deleteNote(key) {
@@ -266,6 +268,8 @@ class Board extends React.Component {
                 addNoteToGroup={this.addNoteToGroup}
                 groupToUse={this.setGroupToUse}
                 increaseImportance={this.increaseNoteImportance}
+                addNote={this.addNote}
+                clearAllNotes={this.clearNotes}
                 />
         }
 

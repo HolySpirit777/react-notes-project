@@ -4,18 +4,37 @@ import './Notes.css';
 
 const Input = (props) => {
 
-    let max = 40;
+    let max = 50;
+
+    let [textNote, setTextNote] = useState('');
+
+    const setTextNoteHandler = (e) => {
+        setTextNote(textNote = e.target.value);
+    }
+
+    const clearTextHandler = () => {
+        setTextNote(textNote = '');
+    }
+
+    const addTextNote = () => {
+        if(textNote) {
+            props.add(textNote);
+        } else {
+            alert('the text field is empty!!!!!!!!!!!!!!!!!!')
+        }
+    }
+
 
     return (
         <div className="board-input">
             <label>Add Notes</label>
             <br/>
-            <textarea maxLength={max} name="nota" value={props.value} placeholder="Enter the text" onChange={props.input}></textarea>
+            <textarea maxLength={max} name="nota" value={textNote} placeholder="Enter the text" onChange={setTextNoteHandler}></textarea>
             <br/>
-            <label>Characters left: {max - props.value.length} </label>
+            <label>Characters left: {max - textNote.length} </label>
             <br/>
-            <button onClick={props.add}>Add</button>
-            <button onClick={props.clear}>Clear</button>
+            <button onClick={addTextNote}>Add</button>
+            <button onClick={clearTextHandler}>Clear</button>
         </div>
     );
 }
@@ -23,22 +42,24 @@ const Input = (props) => {
 const Notes = props => {
 
     let [activateInput, setActivateInput] = useState(false);
+    let inputView = null;
 
-    // if(this.state.activateInput) {
-    //     input = <Input 
-    //     input={this.setNote} 
-    //     add={this.addNote} 
-    //     clear={this.clearInput} 
-    //     value={this.state.textNote}
-    //     />
-    // }
+    const activateInputHandler = () => {
+        setActivateInput(activateInput = !activateInput);
+    }
+
+    if(activateInput) {
+        inputView = <Input add={props.addNote} />
+    }
 
     return <div>
         <h1 className="notes-text">Notes</h1>
         <div className="notes-panel-button">
-        <button className="notes-button">add note</button>
-        <button className="notes-button">delete all notes</button>
+        <button className="notes-button" onClick={activateInputHandler}>add note</button>
+        <button className="notes-button" onClick={props.clearAllNotes}>delete all notes</button>
         </div>
+
+        {inputView}
 
         {props.notes.length > 0 ? props.notes.map(note => {
                 return <div className>
