@@ -19,6 +19,7 @@ const Input = (props) => {
     const addTextNote = () => {
         if(textNote) {
             props.add(textNote);
+            setTextNote(textNote = '');
         } else {
             alert('the text field is empty!!!!!!!!!!!!!!!!!!')
         }
@@ -33,8 +34,8 @@ const Input = (props) => {
             <br/>
             <label>Characters left: {max - textNote.length} </label>
             <br/>
-            <button onClick={addTextNote}>Add</button>
-            <button onClick={clearTextHandler}>Clear</button>
+            <button onClick={addTextNote}>add</button>
+            <button onClick={clearTextHandler}>clear</button>
         </div>
     );
 }
@@ -62,16 +63,15 @@ const Notes = props => {
         {inputView}
 
         {props.notes.length > 0 ? props.notes.map(note => {
-                return <div className>
-                <Note
+                return <Note
+                key={note.key}
                 idNote={note.key}
                 text={note.text}
                 memberOfGroup={note.group}
                 noteImportance={note.importance}
-                set={(e) => this.setValueEdit(e, note.key)}
-                delete={this.deleteNote.bind(this, note.key)}
+                // set={(e) => this.setValueEdit(e, note.key)}
+                // delete={this.deleteNote.bind(this, note.key)}
                 />
-                </div>
         }) : <p className="notes-text">No notes</p>}
     </div>
 

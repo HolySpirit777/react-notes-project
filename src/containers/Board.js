@@ -19,7 +19,6 @@ class Board extends React.Component {
             selectGroups: false,
             showGroups: false,
             showNotes: false,
-            textNote: '',
             valueEdit: {
                 key: '',
                 text: ''
@@ -39,21 +38,18 @@ class Board extends React.Component {
 
     //Notes section
 
-    addNote() {
+    addNote(value) {
 
-        if(this.state.textNote) {
+        if(value) {
             let notes = this.state.notes ? [...this.state.notes] : [];
-            notes.push({key: ID(), text: this.state.textNote, group: 'None', importance: 0});
+            notes.push({key: ID(), text: value, group: 'None', importance: 0});
             this.setState({
                 notes: notes,
-                showNotes: true,
-                textNote: ''
+                showNotes: true
             });
         } else {
             alert('field empty');
         }
-
-        console.log(this.state.notes);
 
     }
 
@@ -107,14 +103,6 @@ class Board extends React.Component {
     
     }
 
-    setNote(event) {
-        
-        this.setState({
-            textNote: event.target.value
-        });
-
-    }
-
     clearNotes = () => {
         this.setState({
             notes: []
@@ -145,12 +133,6 @@ class Board extends React.Component {
 
         this.setState({
             notes: notes
-        });
-    }
-
-    clearInput = () => {
-        this.setState({
-            textNote: ''
         });
     }
 
