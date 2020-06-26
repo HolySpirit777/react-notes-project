@@ -228,7 +228,6 @@ class Board extends React.Component {
 
         let notes = null;
         let groups = null;
-        let filterBy = null;
 
         if(this.state.showGroups) {
             groups = <Groups  
@@ -258,40 +257,9 @@ class Board extends React.Component {
                 setNote={this.setValueEdit}
                 editNote={this.ediNote}
                 increaseNoteImportance={this.increaseNoteImportance}
+                showNotes={this.state.showNotes}
                 />
         }
-
-        filterBy = (
-            this.state.groups.length > 0 && this.state.showNotes && this.state.notes.length > 0 ? <div className="board-details">
-                <label className="board-details-text">filter by group: </label> 
-                <select className="board-details-select">
-                    <option>none</option>
-                    {this.state.groups.map(group => 
-                    <option 
-                    key={group.key} 
-                    value={group.name}>
-                        {group.name}
-                    </option>)}
-                </select>
-                <button>apply</button>
-                <br/>
-                <label className="board-details-text">filter by importance: </label> 
-                <select className="board-details-select">
-                    <option value="1">none</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                <button>apply</button>
-            </div> : null
-        )
 
         let details = (
             <div className="board-details">
@@ -309,7 +277,6 @@ class Board extends React.Component {
                 groups={this.activateGroups} />
                 {details}
                 {groups}
-                {filterBy}
                 {notes}
             </div>
         )
