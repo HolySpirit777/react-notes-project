@@ -27,7 +27,6 @@ class Board extends React.Component {
             groupToUse: ''
         }
 
-        this.setNote = this.setNote.bind(this);
         this.addNote = this.addNote.bind(this);
         this.activateNote = this.activateNote.bind(this);
         this.activateGroups = this.activateGroups.bind(this);
@@ -300,7 +299,6 @@ class Board extends React.Component {
             <div className="App">
                 <Actions 
                 add={this.activateNote} 
-                clear={this.clearNotes}
                 groups={this.activateGroups} />
                 {details}
                 {groups}

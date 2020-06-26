@@ -37,7 +37,7 @@ const Groups = (props) => {
     if(showCreate) {
         createPanel = (
             <div>
-                <label>name of group: </label> <input type="text" value={groupName} onChange={groupNameHandler}/> <br/>
+                <label>name of group: </label> <input type="text" value={groupName} onChange={groupNameHandler}/>
                 <button onClick={addHandler}>add group</button>
             </div>
         )
