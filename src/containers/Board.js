@@ -271,10 +271,11 @@ class Board extends React.Component {
         
 
         return (
-            <div className="App">
+            <div>
                 <Actions 
                 add={this.activateNote} 
-                groups={this.activateGroups} />
+                groups={this.activateGroups} 
+                />
                 {details}
                 {groups}
                 {notes}
