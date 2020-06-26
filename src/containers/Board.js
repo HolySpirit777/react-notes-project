@@ -32,6 +32,8 @@ class Board extends React.Component {
         this.activateGroups = this.activateGroups.bind(this);
         this.addToGroup = this.addToGroup.bind(this);
         this.increaseNoteImportance = this.increaseNoteImportance.bind(this);
+        this.deleteNote = this.deleteNote.bind(this);
+        this.setValueEdit = this.setValueEdit.bind(this);
 
     }
 
@@ -41,7 +43,7 @@ class Board extends React.Component {
 
         if(value) {
             let notes = this.state.notes ? [...this.state.notes] : [];
-            notes.push({key: ID(), text: value, group: 'None', importance: 0});
+            notes.push({key: ID(), text: value, group: 'none', importance: 0});
             this.setState({
                 notes: notes,
                 showNotes: true
@@ -246,11 +248,16 @@ class Board extends React.Component {
                 selectGroups={this.state.selectGroups}
                 showSelectedGroups={this.showGroupsNotes}
                 groups={this.state.groups}
-                addNoteToGroup={this.addNoteToGroup}
+                addToGroup={this.addNoteToGroup}
                 groupToUse={this.setGroupToUse}
                 increaseImportance={this.increaseNoteImportance}
                 addNote={this.addNote}
                 clearAllNotes={this.clearNotes}
+                getGroups={this.state.groups}
+                deleteNote={this.deleteNote}
+                setNote={this.setValueEdit}
+                editNote={this.ediNote}
+                increaseNoteImportance={this.increaseNoteImportance}
                 />
         }
 

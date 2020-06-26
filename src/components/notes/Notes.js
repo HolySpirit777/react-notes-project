@@ -28,11 +28,11 @@ const Input = (props) => {
 
     return (
         <div className="board-input">
-            <label>Add Notes</label>
+            <label>add notes</label>
             <br/>
             <textarea maxLength={max} name="nota" value={textNote} placeholder="Enter the text" onChange={setTextNoteHandler}></textarea>
             <br/>
-            <label>Characters left: {max - textNote.length} </label>
+            <label>characters left: {max - textNote.length} </label>
             <br/>
             <button onClick={addTextNote}>add</button>
             <button onClick={clearTextHandler}>clear</button>
@@ -54,7 +54,7 @@ const Notes = props => {
     }
 
     return <div>
-        <h1 className="notes-text">Notes</h1>
+        <h1 className="notes-text">notes</h1>
         <div className="notes-panel-button">
         <button className="notes-button" onClick={activateInputHandler}>add note</button>
         <button className="notes-button" onClick={props.clearAllNotes}>delete all notes</button>
@@ -69,10 +69,15 @@ const Notes = props => {
                 text={note.text}
                 memberOfGroup={note.group}
                 noteImportance={note.importance}
-                // set={(e) => this.setValueEdit(e, note.key)}
-                // delete={this.deleteNote.bind(this, note.key)}
+                groups={props.getGroups}
+                set={props.setNote}
+                delete={props.deleteNote}
+                edit={props.editNote}
+                increaseImportance={props.increaseNoteImportance}
+                groupToUse={props.groupToUse}
+                addToGroup={props.addToGroup}
                 />
-        }) : <p className="notes-text">No notes</p>}
+        }) : <p className="notes-text">no notes</p>}
     </div>
 
 }

@@ -4,8 +4,8 @@ import './Actions.css';
 const Actions = (props) => {
     return (
         <div className="menu-buttons">
-            <button onClick={props.add}>Notes</button>
-            <button onClick={props.groups}>Groups</button>
+            <button onClick={props.add}>notes</button>
+            <button onClick={props.groups}>groups</button>
         </div>
     );
 }

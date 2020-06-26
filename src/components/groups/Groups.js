@@ -38,7 +38,7 @@ const Groups = (props) => {
         createPanel = (
             <div>
                 <label>name of group: </label> <input type="text" value={groupName} onChange={groupNameHandler}/>
-                <button onClick={addHandler}>add group</button>
+                <button className="groups-button" onClick={addHandler}>add group</button>
             </div>
         )
     }
@@ -47,13 +47,13 @@ const Groups = (props) => {
         showGroup = (
                 props.groups.map(group => {
                     return <div key={group.key}>
-                        <label>Name of group: {group.name}</label><br/>
-                        <label>Notes:</label><br/>
+                        <label>name of group: {group.name}</label><br/>
+                        <label>notes:</label><br/>
                         {group.notes.length > 0 ? group.notes.map(note => {
                             return <div key={note.key}>
                                 <label>{note.text}</label>
                             </div>
-                        }) : <b>No notes added</b>}
+                        }) : <b>no notes added</b>}
                     </div>
                 })
         )
@@ -61,10 +61,10 @@ const Groups = (props) => {
 
     return (
         <div className="groups">
-            <h1>Groups</h1>
-            <button onClick={showCreatePanel}>create group</button>
-            <button onClick={showGroupsPanel}>show groups</button>
-            <button onClick={props.clearGroups}>clear groups</button>
+            <h1>groups</h1>
+            <button className="groups-button" onClick={showCreatePanel}>create group</button>
+            <button className="groups-button" onClick={showGroupsPanel}>show groups</button>
+            <button className="groups-button" onClick={props.clearGroups}>delete all groups</button>
             <br/>
             <br/>
             {showGroup}

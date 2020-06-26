@@ -9,7 +9,7 @@ const GetGroups = (props) => {
         {props.getGroups.map(group => <option key={group.key} value={group.name}>{group.name}</option>)}
         </select>
         <br />
-        <button onClick={props.addToGroup}>add</button>
+        <button onClick={props.addNoteToGroup}>add</button>
         </div>
 
     )
@@ -25,11 +25,11 @@ const Note = (props) => {
     if(toggleGroup) {
         groups = props.groups.length > 0 ? <GetGroups 
         getGroups={props.groups} 
-        addToGroup={() => props.addNoteToGroup(props.idNote)}
+        addNoteToGroup={() => props.addToGroup(props.idNote)}
         groupToUse={props.groupToUse} 
         />
         : <><br/>
-        <label>'No groups created'</label>
+        <label>'no groups created'</label>
         </>
     }
 
@@ -51,13 +51,13 @@ const Note = (props) => {
         <br/>
         <label>Group: {props.memberOfGroup}</label>
         <br/>
-        <button className="note-button" onClick={props.delete}>delete note</button>
+        <button className="note-button" onClick={() => props.delete(props.idNote)}>delete note</button>
         <button className="note-button" onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
         <button className="note-button" onClick={returnBox}>edit</button>
         {groups}
         </div> : <div>
         <br/>
-        <textarea onChange={props.set}></textarea>
+        <textarea onChange={(e) => props.set(e, props.idNote)}></textarea>
         <br/>
         <button className="note-button" onClick={updateReturn}>update</button>
         <button className="note-button" onClick={returnBox}>return</button>
