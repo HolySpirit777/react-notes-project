@@ -43,19 +43,9 @@ const Input = (props) => {
 const Notes = props => {
 
     let [activateInput, setActivateInput] = useState(false);
-    let inputView = null;
-    let filterBy = null;
 
-    const activateInputHandler = () => {
-        setActivateInput(activateInput = !activateInput);
-    }
-
-    if(activateInput) {
-        inputView = <Input add={props.addNote} />
-    }
-
-    filterBy = (
-        props.groups.length > 0 && props.showNotes && props.notes.length > 0 ? <div className="board-details">
+    let filterBy = (
+        (props.groups.length > 0 && props.showNotes && props.notes.length) && <div className="board-details">
             <label className="board-details-text">filter by group: </label> 
             <select className="board-details-select">
                 <option>none</option>
@@ -83,9 +73,16 @@ const Notes = props => {
                 <option value="10">10</option>
             </select>
             <button>apply</button>
-        </div> : null
+        </div>
+    );
+
+    let inputView = (
+        activateInput && <Input add={props.addNote} />
     )
-    
+
+    const activateInputHandler = () => {
+        setActivateInput(activateInput = !activateInput);
+    }
 
     return <div>
 
@@ -99,8 +96,7 @@ const Notes = props => {
 
         {filterBy}
 
-        {props.notes.length > 0 ? props.notes.map(note => {
-                return <Note
+        {props.notes.length > 0 ? props.notes.map(note => <Note
                 key={note.key}
                 idNote={note.key}
                 text={note.text}
@@ -114,7 +110,7 @@ const Notes = props => {
                 groupToUse={props.groupToUse}
                 addToGroup={props.addToGroup}
                 />
-        }) : <p className="notes-text">no notes</p>}
+        ) : <p className="notes-text">no notes</p>}
 
     </div>
 

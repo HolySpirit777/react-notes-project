@@ -31,33 +31,26 @@ const Groups = (props) => {
 
     }
 
-    let showGroup = null;
-    let createPanel = null;
+    let showGroup = (
+        showGroups && props.groups.map(group => {
+            return <div key={group.key}>
+                <label>name of group: {group.name}</label><br/>
+                <label>notes:</label><br/>
+                {group.notes.length > 0 ? group.notes.map(note => {
+                    return <div key={note.key}>
+                        <label>{note.text}</label>
+                    </div>
+                }) : <b>no notes added</b>}
+            </div>
+        })
+    );
 
-    if(showCreate) {
-        createPanel = (
-            <div>
+    let createPanel = (
+        showCreate && <div>
                 <label>name of group: </label> <input type="text" value={groupName} onChange={groupNameHandler}/>
                 <button className="groups-button" onClick={addHandler}>add group</button>
             </div>
-        )
-    }
-
-    if(showGroups) {
-        showGroup = (
-                props.groups.map(group => {
-                    return <div key={group.key}>
-                        <label>name of group: {group.name}</label><br/>
-                        <label>notes:</label><br/>
-                        {group.notes.length > 0 ? group.notes.map(note => {
-                            return <div key={note.key}>
-                                <label>{note.text}</label>
-                            </div>
-                        }) : <b>no notes added</b>}
-                    </div>
-                })
-        )
-    }
+    );
 
     return (
         <div className="groups">

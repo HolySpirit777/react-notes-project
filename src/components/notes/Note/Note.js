@@ -20,18 +20,13 @@ const Note = (props) => {
     let [toggleGroup, setToggleGroup] = useState(false);
     let [toggle, setToggle] = useState(true);
 
-    let groups = null;
-
-    if(toggleGroup) {
-        groups = props.groups.length > 0 ? <GetGroups 
+    let groups = (
+        (toggleGroup && props.groups.length > 0) && <GetGroups 
         getGroups={props.groups} 
         addNoteToGroup={() => props.addToGroup(props.idNote)}
         groupToUse={props.groupToUse} 
         />
-        : <><br/>
-        <label>'no groups created'</label>
-        </>
-    }
+    );
 
     function returnBox() {
         setToggle(toggle = !toggle);
@@ -55,6 +50,7 @@ const Note = (props) => {
         <button className="note-button" onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
         <button className="note-button" onClick={returnBox}>edit</button>
         {groups}
+        {props.groups.length > 0 ||  <label>'no groups created'</label>}
         </div> : <div>
         <br/>
         <textarea onChange={(e) => props.set(e, props.idNote)}></textarea>
