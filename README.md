@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project is only for me to test my skills in React and Javascript.
+
 First run npm install inside directory, then run npm start to start the app.
 
 You can create, erase, update notes and also add them to groups.
