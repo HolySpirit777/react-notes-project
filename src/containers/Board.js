@@ -226,21 +226,17 @@ class Board extends React.Component {
 
     render() {
 
-        let notes = null;
-        let groups = null;
-
-        if(this.state.showGroups) {
-            groups = <Groups  
+        let groups = (
+            this.state.showGroups && <Groups  
             groupName={this.setGroupName} 
             addGroup={this.addToGroup} 
             groups={this.state.groups}
             clearGroups={this.clearGroups}
             />
+        );
 
-        }
-
-        if(this.state.showNotes) {
-            notes = <Notes
+        let notes = (
+            this.state.showNotes && <Notes
                 notes={this.state.notes}
                 edit={this.ediNote}
                 toggleAction={this.toggleEdit}
@@ -259,7 +255,7 @@ class Board extends React.Component {
                 increaseNoteImportance={this.increaseNoteImportance}
                 showNotes={this.state.showNotes}
                 />
-        }
+        );
 
         let details = (
             <div className="board-details">
@@ -276,9 +272,13 @@ class Board extends React.Component {
                 add={this.activateNote} 
                 groups={this.activateGroups} 
                 />
+
                 {details}
+
                 {groups}
+
                 {notes}
+
             </div>
         )
     }
