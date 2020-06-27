@@ -15,6 +15,8 @@ class Board extends React.Component {
 
         this.state = {
             notes: [],
+            notesFilter: [],
+            originalNotes: [],
             groups: [],
             selectGroups: false,
             showGroups: false,
@@ -46,7 +48,8 @@ class Board extends React.Component {
             notes.push({key: ID(), text: value, group: 'none', importance: 0});
             this.setState({
                 notes: notes,
-                showNotes: true
+                showNotes: true,
+                originalNotes: notes
             });
         } else {
             alert('field empty');
@@ -68,7 +71,8 @@ class Board extends React.Component {
         notes.splice(index, 1);
 
         this.setState({
-            notes: notes
+            notes: notes,
+            originalNotes: notes
         });
 
     }
@@ -87,7 +91,8 @@ class Board extends React.Component {
     
             notes[index].text = this.state.valueEdit.text;
             this.setState({
-                notes: notes
+                notes: notes,
+                originalNotes: notes
             });
         }
 
@@ -106,8 +111,9 @@ class Board extends React.Component {
 
     clearNotes = () => {
         this.setState({
-            notes: []
-        })
+            notes: [],
+            originalNotes: []
+        });
     }
 
     setValueEdit(e, key) {
@@ -133,7 +139,8 @@ class Board extends React.Component {
         }
 
         this.setState({
-            notes: notes
+            notes: notes,
+            originalNotes: notes
         });
     }
 
@@ -146,7 +153,8 @@ class Board extends React.Component {
         }
         this.setState({
             groups: [],
-            notes: notes
+            notes: notes,
+            originalNotes: notes
         });
     }
 
@@ -154,7 +162,7 @@ class Board extends React.Component {
         this.setState({
             showGroups: !this.state.showGroups,
             showNotes: false
-        })
+        });
     }
 
     setGroupName = (e) => {
@@ -188,7 +196,7 @@ class Board extends React.Component {
     showGroupsNotes = () => {
         this.setState({
             selectGroups: !this.state.selectGroups
-        })
+        });
     }
 
     addNoteToGroup = (noteKey) => {
@@ -214,14 +222,31 @@ class Board extends React.Component {
         }
         this.setState({
             notes: notes,
-            groups: groups
-        })
+            groups: groups,
+            originalNotes: notes
+        });
     }
 
     setGroupToUse = (e) => {
         this.setState({
             setGroupToUse: e.target.value
-        })
+        });
+    }
+
+    //Filter section
+
+    removeAllFilters = () => {
+        this.setState({
+            notes: this.state.originalNotes
+        });
+    }
+
+    filterNotesByGroup = (value) => {
+        let notes = [...this.state.notes];
+        let filterApplied = notes.filter(note => note.group === value);
+        this.setState({
+            notes: filterApplied
+        });
     }
 
     render() {
@@ -254,6 +279,8 @@ class Board extends React.Component {
                 editNote={this.ediNote}
                 increaseNoteImportance={this.increaseNoteImportance}
                 showNotes={this.state.showNotes}
+                filterByGroup={this.filterNotesByGroup}
+                removeFilter={this.removeAllFilters}
                 />
         );
 
