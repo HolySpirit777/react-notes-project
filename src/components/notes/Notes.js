@@ -65,6 +65,7 @@ const Notes = props => {
                     }
                     if(!inNotes) {
                         importanceListFilter.push({importance: note.importance, key:ID()});
+                        //clean importanceListFilter
                     }
                 }
             }
