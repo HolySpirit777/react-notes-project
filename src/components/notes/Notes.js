@@ -53,12 +53,20 @@ const Notes = props => {
     useEffect(() => {
 
         let notes = [...props.notes];
+        let inNotes = false;
     
         notes.forEach(note => {
-            if(note.importance in importanceListFilter) {
-                return
+            if(importanceListFilter.length < 1) {
+                importanceListFilter.push({importance: note.importance, key:ID()});
             } else {
-                importanceListFilter.push({key: ID(), importance: note.importance});
+                for (let importance = 0; importance < importanceListFilter.length; importance++) {
+                    if(note.importance === importanceListFilter[importance].importance) {
+                        inNotes = true;
+                    }
+                    if(!inNotes) {
+                        importanceListFilter.push({importance: note.importance, key:ID()});
+                    }
+                }
             }
         });
 
