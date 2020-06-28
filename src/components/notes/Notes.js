@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Note from './Note/Note';
 import './Notes.css';
+
+let ID = function () {
+    return Math.random().toString(16).substr(5);
+  };
 
 const Input = (props) => {
 
@@ -44,6 +48,21 @@ const Notes = props => {
 
     let [activateInput, setActivateInput] = useState(false);
     let [filterGroup, setFilterGroup] = useState();
+    let [importanceListFilter] = useState([]);
+
+    useEffect(() => {
+
+        let notes = [...props.notes];
+    
+        notes.forEach(note => {
+            if(note.importance in importanceListFilter) {
+                return
+            } else {
+                importanceListFilter.push({key: ID(), importance: note.importance});
+            }
+        });
+
+    });
 
     let filterBy = (
         (props.groups.length > 0 && props.showNotes && props.notes.length) && <div className="board-details">
@@ -61,7 +80,10 @@ const Notes = props => {
             <br/>
             <label className="board-details-text">filter by importance: </label> 
             <select className="board-details-select">
-                <option value="1">none</option>
+                <option>none</option>
+                {importanceListFilter.map(importance => <option key={importance.key} value={importance.importance}>
+                {importance.importance}
+                </option>)}
             </select>
             <button>apply</button>
             <br />

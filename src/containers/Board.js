@@ -110,10 +110,12 @@ class Board extends React.Component {
     }
 
     clearNotes = () => {
+
         this.setState({
             notes: [],
             originalNotes: []
         });
+
     }
 
     setValueEdit(e, key) {
@@ -295,6 +297,7 @@ class Board extends React.Component {
 
         return (
             <div>
+
                 <Actions 
                 add={this.activateNote} 
                 groups={this.activateGroups} 
