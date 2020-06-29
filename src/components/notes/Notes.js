@@ -48,30 +48,29 @@ const Notes = props => {
 
     let [activateInput, setActivateInput] = useState(false);
     let [filterGroup, setFilterGroup] = useState();
-    let [importanceListFilter] = useState([]);
+    let [importanceListFilter, setimportanceListFilter] = useState([]);
 
     useEffect(() => {
 
         let notes = [...props.notes];
         let inNotes = false;
-    
-        notes.forEach(note => {
+
+        for (const note of notes) {
             if(importanceListFilter.length < 1) {
-                importanceListFilter.push({importance: note.importance, key:ID()});
+                setimportanceListFilter([{importance: note.importance, key: ID()}])
             } else {
-                for (let importance = 0; importance < importanceListFilter.length; importance++) {
-                    if(note.importance === importanceListFilter[importance].importance) {
+                for (const iterator of importanceListFilter) {
+                    if(iterator.importance === note.importance) {
                         inNotes = true;
-                    }
-                    if(!inNotes) {
-                        importanceListFilter.push({importance: note.importance, key:ID()});
-                        //clean importanceListFilter
                     }
                 }
             }
-        });
+            if(!inNotes) {
+                setimportanceListFilter([...importanceListFilter, {importance: note.importance, key: ID()}])
+            }
+        }
 
-    });
+    },[props.notes, importanceListFilter]);
 
     let filterBy = (
         (props.groups.length > 0 && props.showNotes && props.notes.length) && <div className="board-details">
