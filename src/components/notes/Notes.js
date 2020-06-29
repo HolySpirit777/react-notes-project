@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Note from './Note/Note';
 import './Notes.css';
 
-let ID = function () {
-    return Math.random().toString(16).substr(5);
-  };
+// let ID = function () {
+//     return Math.random().toString(16).substr(5);
+//   };
 
 const Input = (props) => {
 
@@ -48,29 +48,31 @@ const Notes = props => {
 
     let [activateInput, setActivateInput] = useState(false);
     let [filterGroup, setFilterGroup] = useState();
-    let [importanceListFilter, setimportanceListFilter] = useState([]);
+    // let [importanceListFilter, setimportanceListFilter] = useState([]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        let notes = [...props.notes];
-        let inNotes = false;
+    //     let notes = [...props.notes];
+    //     let inNotes = false;
 
-        for (const note of notes) {
-            if(importanceListFilter.length < 1) {
-                setimportanceListFilter([{importance: note.importance, key: ID()}])
-            } else {
-                for (const iterator of importanceListFilter) {
-                    if(iterator.importance === note.importance) {
-                        inNotes = true;
-                    }
-                }
-            }
-            if(!inNotes) {
-                setimportanceListFilter([...importanceListFilter, {importance: note.importance, key: ID()}])
-            }
-        }
+    //     for (const note of notes) {
+    //         if(importanceListFilter.length < 1) {
+    //             setimportanceListFilter([{importance: note.importance, key: ID()}])
+    //         } else {
+    //             for (const iterator of importanceListFilter) {
+    //                 console.log(iterator);
+    //                 if(iterator.importance === note.importance) {
+    //                     inNotes = true;
+    //                 }
+    //             }
+    //         }
+    //         if(!inNotes) {
+    //             setimportanceListFilter([...importanceListFilter, {importance: note.importance, key: ID()}]);
+    //         }
+    //     }
+    //     // console.log(importanceListFilter);
 
-    },[props.notes, importanceListFilter]);
+    // },[props.notes, importanceListFilter]);
 
     let filterBy = (
         (props.groups.length > 0 && props.showNotes && props.notes.length) && <div className="board-details">
@@ -86,7 +88,7 @@ const Notes = props => {
             </select>
             <button onClick={() => props.filterByGroup(filterGroup)}>apply</button>
             <br/>
-            <label className="board-details-text">filter by importance: </label> 
+            {/* <label className="board-details-text">filter by importance: </label> 
             <select className="board-details-select">
                 <option>none</option>
                 {importanceListFilter.map(importance => <option key={importance.key} value={importance.importance}>
@@ -94,7 +96,7 @@ const Notes = props => {
                 </option>)}
             </select>
             <button>apply</button>
-            <br />
+            <br /> */}
             <button onClick={props.removeFilter}>remove filter</button>
         </div>
     );
