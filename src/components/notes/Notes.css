@@ -9,3 +9,15 @@
 .notes-panel-button {
     text-align: center;
 }
+
+.notes-board {
+    width: 1100px;
+    background: lightblue;
+    display: inline-block;
+    border: solid;
+    margin: 10px;
+}
+
+.notes-board-parent {
+    text-align: center;
+}

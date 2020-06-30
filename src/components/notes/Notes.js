@@ -121,6 +121,11 @@ const Notes = props => {
 
         {filterBy}
 
+
+        <div className="notes-board-parent">
+            
+        <div className="notes-board">
+        <h2>Table</h2>
         {props.notes.length > 0 ? props.notes.map(note => <Note
                 key={note.key}
                 idNote={note.key}
@@ -136,6 +141,11 @@ const Notes = props => {
                 addToGroup={props.addToGroup}
                 />
         ) : <p className="notes-text">no notes</p>}
+        </div>
+        </div>
+
+
+
 
     </div>
 
