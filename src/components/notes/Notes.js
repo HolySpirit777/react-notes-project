@@ -111,6 +111,10 @@ const Notes = props => {
 
     return <div>
 
+
+        <div className="notes-board-parent">
+            
+        <div className="notes-board">
         <h1 className="notes-text">notes</h1>
         <div className="notes-panel-button">
         <button className="notes-button" onClick={activateInputHandler}>add note</button>
@@ -122,9 +126,8 @@ const Notes = props => {
         {filterBy}
 
 
-        <div className="notes-board-parent">
-            
-        <div className="notes-board">
+
+
         <h2>Table</h2>
         {props.notes.length > 0 ? props.notes.map(note => <Note
                 key={note.key}
