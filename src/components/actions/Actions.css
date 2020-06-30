@@ -2,3 +2,15 @@
     text-align: center;
     padding: 3px;
 }
+
+.menu-button {
+    padding: 5px;
+    width: 140px;
+    display: inline;
+    margin: 5px;
+    border: none;
+}
+
+.menu-button-center {
+    text-align: center;
+}
