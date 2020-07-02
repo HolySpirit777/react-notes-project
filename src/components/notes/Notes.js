@@ -8,7 +8,7 @@ import './Notes.css';
 
 const Input = (props) => {
 
-    let max = 50;
+    let max = 100;
 
     let [textNote, setTextNote] = useState('');
 
@@ -34,12 +34,12 @@ const Input = (props) => {
         <div className="board-input">
             <label>add notes</label>
             <br/>
-            <textarea maxLength={max} name="nota" value={textNote} placeholder="Enter the text" onChange={setTextNoteHandler}></textarea>
+            <textarea class="notes-input" maxLength={max} name="nota" value={textNote} placeholder="Enter the text" onChange={setTextNoteHandler}></textarea>
             <br/>
             <label>characters left: {max - textNote.length} </label>
             <br/>
-            <button onClick={addTextNote}>add</button>
-            <button onClick={clearTextHandler}>clear</button>
+            <button className="notes-button" onClick={addTextNote}>add</button>
+            <button className="notes-button" onClick={clearTextHandler}>clear</button>
         </div>
     );
 }
@@ -115,7 +115,8 @@ const Notes = props => {
         <div className="notes-board-parent">
             
         <div className="notes-board">
-        <h1 className="notes-text">notes</h1>
+
+        <h2 className="notes-text">notes</h2>
         <div className="notes-panel-button">
         <button className="notes-button" onClick={activateInputHandler}>add note</button>
         <button className="notes-button" onClick={props.clearAllNotes}>delete all notes</button>
@@ -125,7 +126,7 @@ const Notes = props => {
 
         {filterBy}
 
-        <h2>table</h2>
+        <h3>table</h3>
         {props.notes.length > 0 ? props.notes.map(note => <Note
                 key={note.key}
                 idNote={note.key}
@@ -141,7 +142,9 @@ const Notes = props => {
                 addToGroup={props.addToGroup}
                 />
         ) : <p className="notes-text">no notes</p>}
+        
         </div>
+
         </div>
 
 

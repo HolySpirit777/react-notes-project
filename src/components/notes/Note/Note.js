@@ -9,7 +9,7 @@ const GetGroups = (props) => {
         {props.getGroups.map(group => <option key={group.key} value={group.name}>{group.name}</option>)}
         </select>
         <br />
-        <button onClick={props.addNoteToGroup}>add</button>
+        <button className="note-button" onClick={props.addNoteToGroup}>add</button>
         </div>
 
     )
@@ -50,7 +50,7 @@ const Note = (props) => {
         <button className="note-button" onClick={() => setToggleGroup(toggleGroup = !toggleGroup)}>add to group</button>
         <button className="note-button" onClick={returnBox}>edit</button>
         {groups}
-        {props.groups.length > 0 ||  <label>'no groups created'</label>}
+        {props.groups.length > 0 ||  <><br /><label>'no groups created'</label></>}
         </div> : <div>
         <br/>
         <textarea onChange={(e) => props.set(e, props.idNote)}></textarea>
