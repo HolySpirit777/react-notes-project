@@ -126,7 +126,6 @@ const Notes = props => {
 
         {filterBy}
 
-        <h3>table</h3>
         {props.notes.length > 0 ? props.notes.map(note => <Note
                 key={note.key}
                 idNote={note.key}

@@ -1,7 +1,39 @@
 .groups {
     text-align: center;
+    background-color: rgb(99, 250, 94);
+    width: 1100px;
+    display: inline-block;
+    margin: 10px;
+    border: solid;
+    border-width: 1px;
+}
+
+.groups-board-parent {
+    text-align: center;
 }
 
 .groups-button {
     padding: 3px;
+}
+
+.groups-input-panel {
+    margin: 30px;
+}
+
+.groups-input-text {
+    border: none;
+    height: 22px;
+    margin-right: 5px;
+}
+
+.groups-show-panel {
+    margin: 30px;
+}
+
+.groups-button {
+    padding: 5px;
+    border: solid;
+    border-width: 1px;
+    margin: 3px;
+    background: white;
 }
