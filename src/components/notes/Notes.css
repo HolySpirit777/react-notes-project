@@ -4,6 +4,7 @@
     border-width: 1px;
     margin: 3px;
     background: white;
+    margin-bottom: 10px;
 }
 
 .notes-panel-button {
@@ -30,4 +31,8 @@
     border-radius: 3px;
     height: 80px;
     width: 210px;
+}
+
+.board-input {
+    margin: 20px;
 }
