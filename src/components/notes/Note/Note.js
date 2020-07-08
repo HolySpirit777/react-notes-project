@@ -23,10 +23,15 @@ const Note = (props) => {
     let groups = (
         (toggleGroup && props.groups.length > 0) && <GetGroups 
         getGroups={props.groups} 
-        addNoteToGroup={() => props.addToGroup(props.idNote)}
+        addNoteToGroup={() => addGrouptoNote()}
         groupToUse={props.groupToUse} 
         />
     );
+
+    function addGrouptoNote() {
+        props.addToGroup(props.idNote);
+        setToggleGroup(toggleGroup = !toggleGroup)
+    }
 
     function returnBox() {
         setToggle(toggle = !toggle);
